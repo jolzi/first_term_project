@@ -1,90 +1,73 @@
-import Axios from "axios";
-import React, {useState, useEffect } from "react";
+
 import './App.css';
 
+import StepWizard from "react-step-wizard";
+import Step1 from "./components/Step1";
+import Step2 from "./components/Step2";
+import Step3 from "./components/Step3";
+import Step4 from "./components/Step4";
+import Step5 from "./components/Step5";
+import Step6 from "./components/Step6";
+import Step7 from "./components/Step7";
+import Step8 from "./components/Step8";
+import Step9 from "./components/Step9";
+import Step10 from "./components/Step10";
+import Step11 from "./components/Step11";
+import Step12 from "./components/Step12";
+import Step13 from "./components/Step13";
+import Step14 from "./components/Step14";
+import Step15 from "./components/Step15";
+import Step16 from "./components/Step16";
+import Step17 from "./components/Step17";
+import Step18 from "./components/Step18";
+import Step19_0 from "./components/Step19_0";
+import Step19_1 from "./components/Step19_1";
+import Step19_2 from "./components/Step19_2";
+import Step19_3 from "./components/Step19_3";
+import Step19_4 from "./components/Step19_4";
+import Step19_5 from "./components/Step19_5";
+import Step19_6 from "./components/Step19_6";
+import Step19_7 from "./components/Step19_7";
+import Step19_8 from "./components/Step19_8";
 
 function App() {
 
-  const [classification, setClassification] = useState("");
-  const [certainty, setCertainty] = useState("");
-  const [imgSrc, setImgSrc] = useState("http://localhost:3001/image");
-  const [imgHash, setImgHash] = useState();
-  //const { speak } = useSpeechSynthesis();
+  return (
 
-  useEffect(() => {
-    setImgHash(Date.now);
-    Axios.get("http://localhost:3001/classification").then((response) => {
-      setClassification(response.data.classification);
-      setCertainty(response.data.certainty);
-    })
-  }, []);
+    <div className="App">
+      <StepWizard isLazyMount={true}>
+        <Step1/>
+        <Step2/>
+        <Step3/>
+        <Step4/>
+        <Step5/>
+        <Step6/>
+        <Step7/>
+        <Step8/>
+        <Step9/>
+        <Step10/>
+        <Step11/>
+        <Step12/>
+        <Step13/>
+        <Step14/>
+        <Step15/>
+        <Step16/>
+        <Step17/>
+        <Step18/>
+        <Step19_0/>
+        <Step19_1/>
+        <Step19_2/>
+        <Step19_3/>
+        <Step19_4/>
+        <Step19_5/>
+        <Step19_6/>
+        <Step19_7/>
+        <Step19_8/>
+      </StepWizard>
 
-  const BecomeFriend = () => {
-    setImgHash(Date.now());
-    Axios.get("http://localhost:3001/classification").then((response) => {
-      setClassification(response.data.classification);
-      setCertainty(response.data.certainty);
-      console.log(certainty);
-    }).then(() => {
-        speak(setUpMessage(certainty, classification));
-    });
-  }
-
-  const NotBecomeFriend = () => {
-    setImgHash(Date.now());
-    Axios.get("http://localhost:3001/classification").then((response) => {
-      setClassification(response.data.classification);
-      console.log(classification);
-    });
-  }
-
-  const setUpMessage = (certainty, classification) => {
-    let processedCertainty;
-    let lastFour = certainty.slice(-4);
-    if(lastFour === '.00%')
-    {
-      processedCertainty = certainty.substr(0, certainty.indexOf('.')) + '%';
-    }
-    else
-    {
-      processedCertainty = certainty;
-    }
-
-    let preposition;
-    let first = classification.charAt(0);
-
-    if(first === 'a' || first === 'e' || first === 'i' || first === 'o' || first === 'u')
-    {
-      preposition = "an";
-    }
-    else
-    {
-      preposition = "a";
-    }
-
-    let msg = `This is, ${processedCertainty} ${preposition} ${classification} person`
-    return msg;
-  }
-
-  const speak = (message) => {
-    var msg = new SpeechSynthesisUtterance();
-	  msg.text = message;
-	  msg.lang = 'en-UK';
-	  msg.volume = 1; // 0 to 1
-	  msg.rate = 1.2; // 0.1 to 10
-	  msg.pitch = 1; //0 to 2
-
-	  speechSynthesis.speak(msg);  
-  }
-
-  return(
-    <div id="page" className="App">
-      <h1>Friendly Friend Helper</h1>
-      <img src={`${imgSrc}?${imgHash}`} width="500" height="500"></img>
-      <h1>{classification}</h1>
-      <button onClick={BecomeFriend}>Become Friemd</button><button onClick={NotBecomeFriend}>No wanna be Friemd</button>
     </div>
-  )
+  );
+
 
 }
 

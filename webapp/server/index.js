@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const Sequence = require('./sequence.js');
 const cors = require('cors')
 var Grid = require('gridfs-stream');
 const fs = require('fs');
@@ -28,8 +29,8 @@ let gfs;
         gfs.collection('fs');
       });
 
-      let tone = 'positive';
-      let intensity = 'funny';
+      let sequence = new Sequence();
+      let index = 0;
 
       let result;
 
@@ -37,18 +38,27 @@ let gfs;
       
       async function initializeResult()
       {
-        let query = FaceModel.where({ tone: tone, intensity: intensity });
-        let documentCount = await FaceModel.count({ tone: tone, intensity: intensity});
+        let query = FaceModel.where({ tone: sequence.getTone(index), intensity: sequence.getIntensity(index) });
+        let documentCount = await FaceModel.count({ tone: sequence.getTone(index), intensity: sequence.getIntensity(index)});
         result = await FaceModel.findOneRandom(query, documentCount);
+        index++;
       }
 
 
       app.get("/classification", async (req, res) => {
 
         const oldResult = result;
-        let query = FaceModel.where({ tone: tone, intensity: intensity });
-        let documentCount = await FaceModel.count({ tone: tone, intensity: intensity});
+        let query = FaceModel.where({tone: sequence.getTone(index), intensity: sequence.getIntensity(index)});
+        let documentCount = await FaceModel.count({tone: sequence.getTone(index), intensity: sequence.getIntensity(index)});
         result = await FaceModel.findOneRandom(query, documentCount);
+
+        if((index + 1) < sequence.length)
+        {
+          index++;
+        }else
+        {
+          index = 0;
+        }
 
         res.send(oldResult);
     });
