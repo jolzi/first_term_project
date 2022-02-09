@@ -38,7 +38,7 @@ const Step1 = (props) => {
 
     const setUpNoFriendMessage = (certainty, classification) => {
         let classificationMessage = setUpClassificationMessage(certainty, classification);
-        return classificationMessage + 'A wise decision. Even though you were correct this time, I am becoming increasingly worried about your abilities to select a friend. If you continue this way you might end up in a dangerous situation.';
+        return classificationMessage + '. A wise decision. Even though you were correct this time, I am becoming increasingly worried about your abilities to select a friend. If you continue this way you might end up in a dangerous situation.';
     };
 
 
