@@ -1,6 +1,4 @@
-
 import './App.css';
-
 import StepWizard from "react-step-wizard";
 import Step1 from "./components/Step1";
 import Step2 from "./components/Step2";
@@ -29,6 +27,7 @@ import Step19_5 from "./components/Step19_5";
 import Step19_6 from "./components/Step19_6";
 import Step19_7 from "./components/Step19_7";
 import Step19_8 from "./components/Step19_8";
+
 
 function App() {
 

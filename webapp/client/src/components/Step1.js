@@ -73,9 +73,21 @@ const Step1 = (props) => {
 
     return (
         <div id="page" className="App">
-            <h1 id="thisHeader">Friendly Friend Helper</h1>
-            <img id="thisimage" src={`${imgSrc}?${imgHash}`} width="500" height="500"></img>
-            <button id="beFriend" onClick={BecomeFriend}>Become Friemd</button><button id="notBeFriend" onClick={NotBecomeFriend}>No wanna be Friemd</button>
+            <div id="pageHeader">
+                <h1 id="headerText">Friendly Friend Helper</h1>
+            </div>
+            <div id="cardContainer">
+                <article id="card">
+                    <img id="thisimage" src={`${imgSrc}?${imgHash}`}></img>
+                    <div id="buttonLayout">
+                        <input type="image" src="/friend.png" id="beFriend" onClick={BecomeFriend} />
+                        <input type="image" src="/notfriend.svg" id="notBeFriend" onClick={NotBecomeFriend} />
+                    </div>
+
+                </article>
+            </div>
+
+
         </div>
     );
 };
