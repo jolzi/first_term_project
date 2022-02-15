@@ -1,5 +1,6 @@
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
+import ImageCard from "./ImageCard";
 
 
 const Step1 = (props) => {
@@ -70,7 +71,7 @@ const Step1 = (props) => {
         });
     };
 
-
+    /*
     return (
         <div id="page" className="App">
             <div id="pageHeader">
@@ -90,6 +91,9 @@ const Step1 = (props) => {
 
         </div>
     );
+    */
+
+    return <ImageCard imgSrc={imgSrc} imgHash={imgHash} becomeFriend={BecomeFriend} notBecomeFriend={NotBecomeFriend}/>;
 };
 
 export default Step1;

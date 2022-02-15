@@ -52,6 +52,45 @@
 
 }
 
+#headerText span:nth-of-type(10n + 1) {
+  color: #098253;
+}
+
+#headerText span:nth-of-type(10n + 2) {
+  color: #ab47bc;
+}
+
+#headerText span:nth-of-type(10n + 3){
+  color: #651fff;
+}
+
+#headerText span:nth-of-type(10n + 5){
+  color: #3949ab;
+}
+
+#headerText span:nth-of-type(10n + 4) {
+  color: #2196f3;
+}
+
+#headerText span:nth-of-type(10n + 6){
+  color: #00bcd4;
+}
+
+#headerText span:nth-of-type(10n + 7){
+  color: #4caf50;
+}
+
+#headerText span:nth-of-type(10n + 8){
+  color: #ffc107;
+}
+
+#headerText span:nth-of-type(10n + 9){
+  color: #ef1a10;
+}
+#headerText span:nth-of-type(10n + 10){
+  color: #5310ef;
+}
+
 #cardContainer{
   padding-top: 50px;
   width: 418px;
@@ -117,6 +156,39 @@
 
   flex: none;
   order: 0;
+  flex-grow: 0;
+  margin: 0px 96px;
+}
+
+#beFriendInactive {
+
+  position: sticky;
+  width: 96px;
+  height: 96px;
+  left: 42.5px;
+  top: 20px;
+
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 0px 96px;
+}
+
+#notBeFriendInactive {
+  position: sticky;
+  width: 96px;
+  height: 96px;
+  left: 234.5px;
+  top: 20px;
+
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
   flex-grow: 0;
   margin: 0px 96px;
 }

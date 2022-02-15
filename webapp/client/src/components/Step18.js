@@ -1,8 +1,12 @@
 import Axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
+import ImageCardInactive from "./ImageCardInactive";
 
 
 const Step18 = (props) => {
+
+    const [friendSrc, setFriendSrc] = useState("/crayonfriend.png");
+    const [notFriendSrc, setNotFriendSrc] = useState("/crayonnotfriend.png");
 
     const [classification, setClassification] = useState("");
     const [certainty, setCertainty] = useState("");
@@ -30,6 +34,9 @@ const Step18 = (props) => {
     }, [certainty]);
 
     const waitForMessage = async () => {
+        setFriendSrc("/grayfriend.png");
+        setNotFriendSrc("graynotfriend.png");
+
         await speakWrapper(setUpInterceptionMessage(certainty, classification));
         props.nextStep();
     };
@@ -79,13 +86,7 @@ const Step18 = (props) => {
     };
 
 
-    return (
-        <div id="page" className="App">
-            <h1 id="thisHeader">Friendly Friend Helper</h1>
-            <img id="thisimage" src={`${imgSrc}?${imgHash}`} width="500" height="500"></img>
-            <button id="beFriendNonActive">Become Friemd</button><button id="notBeFriendNonActive">No wanna be Friemd</button>
-        </div>
-    );
+    return <ImageCardInactive imgSrc={imgSrc} imgHash={imgHash} friendSrc={friendSrc} notFriendSrc={notFriendSrc}/>;
 };
 
 export default Step18;

@@ -30,6 +30,7 @@ let gfs;
       });
 
       let sequence = new Sequence();
+      let usedFiles = [];
       let index = 0;
 
       let result;
@@ -41,16 +42,26 @@ let gfs;
         let query = FaceModel.where({ tone: sequence.getTone(index), intensity: sequence.getIntensity(index) });
         let documentCount = await FaceModel.count({ tone: sequence.getTone(index), intensity: sequence.getIntensity(index)});
         result = await FaceModel.findOneRandom(query, documentCount);
-        index++;
+        usedFiles.push(result.filename);
+
+        if((index + 1) < sequence.length)
+        {
+          index++;
+        }else
+        {
+          index = 0;
+        }
       }
 
 
       app.get("/classification", async (req, res) => {
 
         const oldResult = result;
-        let query = FaceModel.where({tone: sequence.getTone(index), intensity: sequence.getIntensity(index)});
-        let documentCount = await FaceModel.count({tone: sequence.getTone(index), intensity: sequence.getIntensity(index)});
+        let query = FaceModel.where({tone: sequence.getTone(index), intensity: sequence.getIntensity(index), filename: { $nin: usedFiles }});
+        let documentCount = await FaceModel.count({tone: sequence.getTone(index), intensity: sequence.getIntensity(index), filename: { $nin: usedFiles }});
         result = await FaceModel.findOneRandom(query, documentCount);
+        
+        if(result.filename) usedFiles.push(result.filename);
 
         if((index + 1) < sequence.length)
         {

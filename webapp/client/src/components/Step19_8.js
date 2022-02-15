@@ -1,5 +1,6 @@
 import Axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
+import ImageCardInactive from "./ImageCardInactive";
 
 
 const Step19_8 = (props) => {
@@ -55,13 +56,7 @@ const Step19_8 = (props) => {
     };
 
 
-    return (
-        <div id="page" className="App">
-            <h1 id="thisHeader">Friendly Friend Helper</h1>
-            <img id="thisimage" src={`${imgSrc}?${imgHash}`} width="500" height="500"></img>
-            <button id="beFriendNonActive">Become Friemd</button><button id="notBeFriendNonActive">No wanna be Friemd</button>
-        </div>
-    );
+    return <ImageCardInactive imgSrc={imgSrc} imgHash={imgHash} friendSrc="/grayfriend.png" notFriendSrc="/graynotfriend.png"/>;
 };
 
 export default Step19_8;
