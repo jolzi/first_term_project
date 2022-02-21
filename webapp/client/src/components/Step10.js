@@ -1,6 +1,7 @@
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import ImageCard from "./ImageCard";
+import SpeakWrapper from "./SpeakWrapper";
 
 
 const Step10 = (props) => {
@@ -22,12 +23,12 @@ const Step10 = (props) => {
 
     const BecomeFriend = async () => {
 
-        await speakWrapper(setUpClassificationMessage(certainty, classification));
+        await SpeakWrapper(setUpClassificationMessage(certainty, classification));
         props.nextStep();
     };
 
     const NotBecomeFriend = async () => {
-        await speakWrapper(setUpClassificationMessage(certainty, classification));
+        await SpeakWrapper(setUpClassificationMessage(certainty, classification));
         props.nextStep();
     };
 
@@ -54,21 +55,6 @@ const Step10 = (props) => {
 
 
         return `This is, ${processedCertainty} ${preposition}, ${classification} person`
-    };
-
-    const speakWrapper = async (message) => {
-        let msg = new SpeechSynthesisUtterance();
-        msg.text = message;
-
-        msg.lang = 'en-US';
-        msg.volume = 1; // 0 to 1
-        msg.rate = 1.2; // 0.1 to 10
-        msg.pitch = 1; //0 to 2
-
-        await new Promise(function (resolve) {
-            msg.onend = resolve;
-            speechSynthesis.speak(msg);
-        });
     };
 
 

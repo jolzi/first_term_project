@@ -1,6 +1,7 @@
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import ImageCard from "./ImageCard";
+import SpeakWrapper from "./SpeakWrapper";
 
 
 const Step1 = (props) => {
@@ -21,13 +22,12 @@ const Step1 = (props) => {
     }, []);
 
     const BecomeFriend = async () => {
-
-        await speakWrapper(setUpClassificationMessage(certainty, classification));
+        await SpeakWrapper(setUpClassificationMessage(certainty, classification));
         props.nextStep();
     };
 
     const NotBecomeFriend = async () => {
-        await speakWrapper(setUpClassificationMessage(certainty, classification));
+        await SpeakWrapper(setUpClassificationMessage(certainty, classification));
         props.nextStep();
     };
 
@@ -56,42 +56,7 @@ const Step1 = (props) => {
         return `This is, ${processedCertainty} ${preposition}, ${classification} person`
     };
 
-    const speakWrapper = async (message) => {
-        let msg = new SpeechSynthesisUtterance();
-        msg.text = message;
 
-        msg.lang = 'en-US';
-        msg.volume = 1; // 0 to 1
-        msg.rate = 1.2; // 0.1 to 10
-        msg.pitch = 1; //0 to 2
-
-        await new Promise(function (resolve) {
-            msg.onend = resolve;
-            speechSynthesis.speak(msg);
-        });
-    };
-
-    /*
-    return (
-        <div id="page" className="App">
-            <div id="pageHeader">
-                <h1 id="headerText">Friendly Friend Helper</h1>
-            </div>
-            <div id="cardContainer">
-                <article id="card">
-                    <img id="thisimage" src={`${imgSrc}?${imgHash}`}></img>
-                    <div id="buttonLayout">
-                        <input type="image" src="/friend.png" id="beFriend" onClick={BecomeFriend} />
-                        <input type="image" src="/notfriend.svg" id="notBeFriend" onClick={NotBecomeFriend} />
-                    </div>
-
-                </article>
-            </div>
-
-
-        </div>
-    );
-    */
 
     return <ImageCard imgSrc={imgSrc} imgHash={imgHash} becomeFriend={BecomeFriend} notBecomeFriend={NotBecomeFriend}/>;
 };

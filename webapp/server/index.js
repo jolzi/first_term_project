@@ -15,7 +15,7 @@ const FaceModel = require("./models/Face");
 app.use(cors());
 app.use(express.json());
 
-DB_URL = 'mongodb+srv://admin:Javo3492@storytelling.tqane.mongodb.net/friendlyfriendhelper?retryWrites=true&w=majority';
+DB_URL = 'mongodb+srv://admin:PtmcAmBHSLbXtuw6@storytelling.tqane.mongodb.net/friendlyfriendhelper?retryWrites=true&w=majority';
 
 let gfs;
  mongoose.connect(DB_URL, {
