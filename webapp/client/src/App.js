@@ -31,6 +31,7 @@ import Step19_8 from "./components/Step19_8";
 import Header from './components/Header';
 import Background from './components/Background';
 import Onboarding from './components/Onboarding';
+import Start from './components/Start';
 
 
 function App() {
@@ -40,8 +41,9 @@ function App() {
     <div className="App">
       <Header />
       <StepWizard isLazyMount={true}>
+        <Start/>
+      <Onboarding />
         <Step1 />
-        <Onboarding />
         <Step2 />
         <Step3 />
         <Step4 />
