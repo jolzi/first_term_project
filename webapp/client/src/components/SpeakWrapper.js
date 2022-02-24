@@ -21,7 +21,7 @@ const SpeakWrapper = async (message) => {
     msg.pitch = 1; //0 to 2
 
     await new Promise(function (resolve) {
-        console.log(msg.text);
+        //console.log(msg.text);
         msg.onend = resolve;
         speechSynthesis.speak(msg);
     });

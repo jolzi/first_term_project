@@ -32,9 +32,13 @@ import Header from './components/Header';
 import Background from './components/Background';
 import Onboarding from './components/Onboarding';
 import Start from './components/Start';
+import Final from './components/Final';
 
 
 function App() {
+
+    document.title = "Friendly Friend Helper";
+
 
   return (
 
@@ -42,7 +46,8 @@ function App() {
       <Header />
       <StepWizard isLazyMount={true}>
         <Start/>
-      <Onboarding />
+        <Final/>
+     
         <Step1 />
         <Step2 />
         <Step3 />
@@ -70,6 +75,8 @@ function App() {
         <Step19_6 />
         <Step19_7 />
         <Step19_8 />
+
+        <Onboarding />
       </StepWizard>
 
       <Background />

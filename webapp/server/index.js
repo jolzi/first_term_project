@@ -29,16 +29,22 @@ let gfs;
         gfs.collection('fs');
       });
 
-      let sequence = new Sequence();
-      let usedFiles = [];
-      let index = 0;
+      let sequence;
+      let usedFiles;
+      let index;
 
       let result;
 
-      initializeResult();
+      let ids = [];
+
+      //initializeResult();
       
       async function initializeResult()
       {
+        sequence = new Sequence();
+        usedFiles = [];
+        index = 0;
+
         let query = FaceModel.where({ tone: sequence.getTone(index), intensity: sequence.getIntensity(index) });
         let documentCount = await FaceModel.count({ tone: sequence.getTone(index), intensity: sequence.getIntensity(index)});
         result = await FaceModel.findOneRandom(query, documentCount);
@@ -52,6 +58,16 @@ let gfs;
           index = 0;
         }
       }
+
+      app.get("/register", async (req, res) => {
+
+       await initializeResult();
+
+        let currentId = ids.length;
+        ids.push(currentId);
+        res.send({ currentId: currentId});
+
+      });
 
 
       app.get("/classification", async (req, res) => {

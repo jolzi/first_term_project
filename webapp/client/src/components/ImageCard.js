@@ -9,7 +9,7 @@ class ImageCard extends Component {
                 
                 <div id="cardContainer">
                     <article id="card">
-                        <img id="thisimage" src={`${this.props.imgSrc}?${this.props.imgHash}`}></img>
+                        <img id="thisImage" src={`${this.props.imgSrc}?${this.props.imgHash}`}></img>
                         <div id="buttonLayout">
                             <input type="image" src="/crayonnotfriend.png" id="notBeFriend" onClick={this.props.notBecomeFriend} />
                             <input type="image" src="/crayonfriend.png" id="beFriend" onClick={this.props.becomeFriend} />

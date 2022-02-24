@@ -1,5 +1,13 @@
 @media (orientation:portrait) {
 
+    @font-face {
+        font-family: "crayola";
+        src: url('../public/Crayola.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    
+      }
+
     html {
         background-image: linear-gradient(#dec1f1, #ffffff);
         height: 120%;
@@ -68,7 +76,7 @@
     #headerText {
         height: 0px;
         inline-size: content;
-        font-family: Crayola;
+        font-family: 'crayola';
         font-style: normal;
         font-weight: normal;
         font-size: 7vw;
@@ -251,7 +259,7 @@
         width: 86.36%;
 
         inline-size: content;
-        font-family: Crayola;
+        font-family: 'crayola';
         font-style: normal;
         font-weight: normal;
         font-size: 15wv;
@@ -260,6 +268,104 @@
         color: #5310ef;
 
     }
+
+    #startContainer {
+        padding-top: 10%;
+        text-align: center;
+    
+        display: inline-block;
+    
+      }
+    
+      #start {
+    
+        width: 418px;
+        height: 224px;
+        background: #FFFFFF;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 25px;
+    
+        display: inline-block;
+        text-align: center;
+      }
+    
+      #startText {
+        width: 373px;
+        height: 0px;
+        inline-size: content;
+        font-family: "crayola";
+        font-style: normal;
+        font-weight: normal;
+        font-size: 36px;
+        display: inline-block;
+        text-align: center;
+        color: #383838;
+    
+      }
+    
+      #startTextContainer {
+    
+        width: 100%;
+        padding-top: 29px;
+        height: 112px;
+    
+      }
+    
+      #startButtonContainer {
+        padding-top: 4.46%;
+    
+        width: 373px;
+        height: 94px;
+        text-align: center;
+        display: inline-block;
+    
+      }
+    
+      #startButton {
+        position:relative;
+        width: 198px;
+        height: 55px;
+        stroke: none;
+        stroke-width: 0%;
+    
+        background: #efe3f7;
+        border-radius: 36px;
+        border: none;
+    
+        font-family: "crayola";
+        font-style: normal;
+        font-weight: normal;
+        font-size: 22px;
+    
+        display: inline-block;
+    
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    
+      }
+    
+      #startButton:hover {
+        opacity: 0.7;
+      }
+    
+      #startButton span:nth-of-type(10n + 1) {
+        color: #ffc107;
+      }
+    
+      #startButton span:nth-of-type(10n + 2) {
+        color: #ab47bc;
+      }
+    
+      #startButton span:nth-of-type(10n + 3) {
+        color: #ef1a10;
+      }
+    
+      #startButton span:nth-of-type(10n + 5) {
+        color: #3949ab;
+      }
+    
+      #startButton span:nth-of-type(10n + 4) {
+        color: #2196f3;
+      }
 
     #backgroundSpace {
         display: inline-block;
