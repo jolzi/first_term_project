@@ -2,6 +2,7 @@ import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import ImageCard from "./ImageCard";
 import SpeakWrapper from "./SpeakWrapper";
+import SoundFader from "./SoundFader";
 
 
 const Step1 = (props) => {
@@ -23,7 +24,7 @@ const Step1 = (props) => {
     }, []);
 
     const BecomeFriend = async () => {
-
+        SoundFader(props.sound1, props.sound2);
         await SpeakWrapper(setUpFriendMessage(certainty, classification, tone));
         props.nextStep();
     };

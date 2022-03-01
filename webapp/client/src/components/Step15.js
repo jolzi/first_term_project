@@ -2,6 +2,7 @@ import Axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
 import ImageCardInactive from "./ImageCardInactive";
 import SpeakWrapper from "./SpeakWrapper";
+import SoundFader from "./SoundFader";
 
 
 const Step15 = (props) => {
@@ -38,6 +39,7 @@ const Step15 = (props) => {
         setFriendSrc("/grayfriend.png");
         setNotFriendSrc("graynotfriend.png");
         
+        SoundFader(props.sound2, props.sound3);
         await SpeakWrapper(setUpInterceptionMessage(certainty, classification));
         props.nextStep();
     };

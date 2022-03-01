@@ -22,7 +22,6 @@ const Step6 = (props) => {
     }, []);
 
     const BecomeFriend = async () => {
-
         await SpeakWrapper(setUpClassificationMessage(certainty, classification));
         props.nextStep();
     };

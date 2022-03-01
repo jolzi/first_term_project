@@ -24,12 +24,12 @@ const Step1 = (props) => {
     }, []);
 
     const BecomeFriend = async () => {
-        await SpeakWrapper(flavorGenerator.setUpClassificationMessage(certainty, classification));
+        await SpeakWrapper(flavorGenerator.setUpFlavorMessage(certainty, classification, tone));
         props.nextStep();
     };
 
     const NotBecomeFriend = async () => {
-        await SpeakWrapper(flavorGenerator.setUpClassificationMessage(certainty, classification));
+        await SpeakWrapper(flavorGenerator.setUpFlavorMessage(certainty, classification, tone));
         props.nextStep();
     };
 

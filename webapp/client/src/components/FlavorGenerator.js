@@ -2,11 +2,10 @@ class FlavorGenerator {
     positiveFlavorTexts = [];
     negativeFlavorTexts = [];
 
-    constructor()
-    {
-        this.positiveFlavorTexts.push({text: 'test', position:'front'});
+    constructor() {
+        this.positiveFlavorTexts.push({ text: 'test', position: 'front' });
 
-        this.negativeFlavorTexts.push({text: 'test', position:'front'});
+        this.negativeFlavorTexts.push({ text: 'test', position: 'back' });
     }
 
     setUpClassificationMessage = (certainty, classification) => {
@@ -32,6 +31,23 @@ class FlavorGenerator {
 
         return `This is, ${processedCertainty} ${preposition}, ${classification} person`
     };
+
+    setUpFlavorMessage = (certainty, classification, tone) => {
+        let msgObject;
+        if (tone === 'positive') {
+            msgObject = this.positiveFlavorTexts[Math.floor(Math.random() * this.positiveFlavorTexts.length)]
+        }
+        else{
+            msgObject = this.negativeFlavorTexts[Math.floor(Math.random() * this.negativeFlavorTexts.length)]
+        }
+
+        if (msgObject.position === 'front') {
+            return msgObject.text + this.setUpClassificationMessage(certainty, classification);
+        }
+        else {
+            return this.setUpClassificationMessage(certainty, classification) + msgObject.text;
+        }
+    }
 }
 
 export default FlavorGenerator;
