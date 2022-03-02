@@ -27,12 +27,12 @@ const Step19_3 = (props) => {
         if (isInitialMount.current) {
             isInitialMount.current = false;
          } else {
-            setTimeout(waitForMessage, 500);
+            setTimeout(waitForMessage, 400);
         }
     }, [certainty]);
 
     const waitForMessage = async () => {
-        await SpeakWrapper(setUpClassificationMessage(certainty, classification));
+        await SpeakWrapper(setUpClassificationMessage(certainty, classification), 0.9);
         props.nextStep();
     };
 

@@ -30,7 +30,8 @@ class Sequence
             ['negative', '3', 19.5],
             ['negative', '3', 19.6],
             ['negative', '3', 19.7],
-            ['negative', '3', 19.8]
+            ['negative', '3', 19.8],
+            ['negative', '2', 20]
         ]
     }
 

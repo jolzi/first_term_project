@@ -111,6 +111,11 @@
     display: inline-block;
     text-align: center;
 
+    text-shadow:  0.2px  0.2px 0.2px rgb(85, 85, 85),
+                  0.2px -0.2px 0.2px rgb(85, 85, 85),
+                 -0.2px  0.2px 0.2px rgb(85, 85, 85),
+                 -0.2px -0.2px 0.2px rgb(85, 85, 85)
+
   }
 
   #headerText span:nth-of-type(10n + 1) {
@@ -437,7 +442,7 @@
     z-index: -100;
   }
 
-  #overlay {
+  .overlay {
     position: fixed;
     /* display: none; */
     width: 100%;
@@ -446,12 +451,20 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
     cursor: default;
     z-index: 5;
+
+    transition: opacity 6.0s;
+    opacity: 1;
   }
 
-  #recommendCard {
+  .overlay.hide {
+    opacity: 0;
+    pointer-events:none;
+  }
+
+  .recommendCard {
     position: fixed;
     z-index: 7;
 
@@ -469,6 +482,14 @@
 
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 
+    transition: opacity 8.0s;
+    opacity: 1;
+
+  }
+
+  .recommendCard.hide {
+    opacity: 0;
+    pointer-events:none;
   }
 
   #recommendTextFrame {

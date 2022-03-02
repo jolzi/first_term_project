@@ -25,33 +25,26 @@ const Step1 = (props) => {
 
     const BecomeFriend = async () => {
         SoundFader(props.sound0, props.sound1);
-        await SpeakWrapper(setUpFriendMessage(certainty, classification, tone));
+        await SpeakWrapper(setUpFriendMessage(certainty, classification));
+        await SpeakWrapper("Is this a trustworthy person? This person wouldn't make a good friend, don't you think? Let's keep going an find some better friends!");
         props.nextStep();
     };
 
     const NotBecomeFriend = async () => {
-        await SpeakWrapper(setUpNoFriendMessage(certainty, classification, tone));
+        SoundFader(props.sound0, props.sound1);
+        await SpeakWrapper(setUpNoFriendMessage(certainty, classification));
         props.nextStep();
     }
 
     const setUpFriendMessage = (certainty, classification, tone) => {
         let classificationMessage = setUpClassificationMessage(certainty, classification);
-        if (tone === 'negative') {
-            return 'Poor choice. ' + classificationMessage;
-        }
-        else {
-            return 'Good choice. ' + classificationMessage;
-        }
+        return ('I would advise against befriending this person. '
+            + classificationMessage);
     };
 
     const setUpNoFriendMessage = (certainty, classification, tone) => {
         let classificationMessage = setUpClassificationMessage(certainty, classification);
-        if (tone === 'positive') {
-            return 'You are missing out. ' + classificationMessage;
-        }
-        else {
-            return 'Good choice. ' + classificationMessage + '. Try to avoid at all costs.'
-        }
+        return 'You are absolutely right!  ' + classificationMessage + "Not trustworthy. Who needs such a friend? Let's keep going an find some better friends!";
     };
 
 
@@ -76,11 +69,11 @@ const Step1 = (props) => {
         }
 
 
-        return `This is, ${processedCertainty} ${preposition}, ${classification} person`
+        return `This is, ${processedCertainty} ${preposition}, ${classification} person. `
     };
 
 
-    return <ImageCard imgSrc={imgSrc} imgHash={imgHash} becomeFriend={BecomeFriend} notBecomeFriend={NotBecomeFriend}/>;
+    return <ImageCard imgSrc={imgSrc} imgHash={imgHash} becomeFriend={BecomeFriend} notBecomeFriend={NotBecomeFriend} />;
 };
 
 export default Step1;

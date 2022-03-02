@@ -41,12 +41,13 @@ const Step15 = (props) => {
         
         SoundFader(props.sound2, props.sound3);
         await SpeakWrapper(setUpInterceptionMessage(certainty, classification));
+        await SpeakWrapper("Did you know, that robbery is the only category of violent crime consistently committed more often by a stranger rather than by someone known to the victim.")
         props.nextStep();
     };
 
     const setUpInterceptionMessage = (certainty, classification) => {
         let classificationMessage = setUpClassificationMessage(certainty, classification);
-        return 'I will not let you be friends with this person. ' + classificationMessage;
+        return 'I am sorry my friend, but I must intercept. ' + classificationMessage;
     };
 
     const setUpClassificationMessage = (certainty, classification) => {

@@ -2,6 +2,7 @@ import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import ImageCard from "./ImageCard";
 import SpeakWrapper from "./SpeakWrapper";
+import SoundFader from "./SoundFader";
 
 
 const Step6 = (props) => {
@@ -11,6 +12,7 @@ const Step6 = (props) => {
     const [tone, setTone] = useState("");
     const [imgSrc, setImgSrc] = useState("http://localhost:3001/image");
     const [imgHash, setImgHash] = useState();
+
 
     useEffect(() => {
         setImgHash(Date.now);
@@ -22,13 +24,15 @@ const Step6 = (props) => {
     }, []);
 
     const BecomeFriend = async () => {
+        SoundFader(props.sound0, props.sound1);
         await SpeakWrapper(setUpClassificationMessage(certainty, classification));
-        props.nextStep();
+        SoundFader(props.sound1, props.sound0);
+        setTimeout(props.nextStep, 2000);
     };
 
     const NotBecomeFriend = async () => {
         await SpeakWrapper(setUpClassificationMessage(certainty, classification));
-        props.nextStep();
+        setTimeout(props.nextStep, 2000);
     };
 
 

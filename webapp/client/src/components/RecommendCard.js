@@ -6,7 +6,7 @@ class RecommendCard extends Component {
     render() {
         return (
             <div id="recommendCardContainer">
-                <div id="recommendCard">
+                <div className={this.props.className}>
                     <div id="recommendTextFrame">
                         <div id='recommendText'>
                             Did you enjoy <span id='emphasis'>Friendly Friend Helper</span>? Why don't you try one of our other services?

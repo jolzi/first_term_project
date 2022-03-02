@@ -1,4 +1,4 @@
-const SpeakWrapper = async (message) => {
+const SpeakWrapper = async (message, pitch=1, volume=1, rate=1) => {
     let msg = new SpeechSynthesisUtterance();
     msg.text = message;
 
@@ -16,9 +16,11 @@ const SpeakWrapper = async (message) => {
         }
     ).then((voices) =>  msg.voice = voices.filter(function(voice) { return voice.name == 'Google US English'; })[0]);
 
-    msg.volume = 1; // 0 to 1
-    msg.rate = 1; // 0.1 to 10
-    msg.pitch = 1; //0 to 2
+    msg.volume = volume; // 0 to 1
+    msg.rate = rate; // 0.1 to 10
+    msg.pitch = pitch; //0 to 2
+
+    console.log(pitch);
 
     await new Promise(function (resolve) {
         //console.log(msg.text);

@@ -26,22 +26,25 @@ const Step1 = (props) => {
     const BecomeFriend = async () => {
         SoundFader(props.sound1, props.sound2);
         await SpeakWrapper(setUpFriendMessage(certainty, classification, tone));
+        await SpeakWrapper(' I begin to doubt, that you can ensure your own safety, if you continue to carelessly befriend anyone.')
         props.nextStep();
     };
 
     const NotBecomeFriend = async () => {
+        SoundFader(props.sound1, props.sound2);
         await SpeakWrapper(setUpNoFriendMessage(certainty, classification, tone));
+        await SpeakWrapper('Even though you were correct this time, I begin to doubt, that you can ensure your own safety, if you continue to carelessly befriend anyone.')
         props.nextStep();
     }
 
     const setUpFriendMessage = (certainty, classification) => {
         let classificationMessage = setUpClassificationMessage(certainty, classification);
-        return classificationMessage + '. I am becoming increasingly worried about your abilities to select a friend. If you continue this way you might end up in a dangerous situation.';
+        return "Are you sure about this? " + classificationMessage 
     };
 
     const setUpNoFriendMessage = (certainty, classification) => {
         let classificationMessage = setUpClassificationMessage(certainty, classification);
-        return classificationMessage + '. A wise decision. Even though you were correct this time, I am becoming increasingly worried about your abilities to select a friend. If you continue this way you might end up in a dangerous situation.';
+        return 'A wise decision. ' + classificationMessage;
     };
 
 

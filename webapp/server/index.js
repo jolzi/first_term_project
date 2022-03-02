@@ -73,7 +73,14 @@ let gfs;
       app.get("/classification", async (req, res) => {
 
         const oldResult = result;
-        let query = FaceModel.where({tone: sequence.getTone(index), intensity: sequence.getIntensity(index), filename: { $nin: usedFiles }});
+        let query;
+        try{
+          query = FaceModel.where({tone: sequence.getTone(index), intensity: sequence.getIntensity(index), filename: { $nin: usedFiles }});
+        }catch(e){
+          usedFiles = [];
+          query = FaceModel.where({tone: sequence.getTone(index), intensity: sequence.getIntensity(index), filename: { $nin: usedFiles }});
+        }
+        
         let documentCount = await FaceModel.count({tone: sequence.getTone(index), intensity: sequence.getIntensity(index), filename: { $nin: usedFiles }});
         result = await FaceModel.findOneRandom(query, documentCount);
         

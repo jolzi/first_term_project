@@ -14,8 +14,15 @@ const Final = (props) => {
     const [imgSrc, setImgSrc] = useState("http://localhost:3001/image");
     const [imgHash, setImgHash] = useState();
     const isInitialMount = useRef(true);
+    
+    let pitch = 1.0;
+    let volume = 1.1;
 
-    const [renderComponent, setRenderComponent] = useState(<ImageCardInactive imgSrc={imgSrc} imgHash={imgHash} friendSrc="/grayfriend.png" notFriendSrc="/graynotfriend.png"/>);
+    const [renderComponent, setRenderComponent] = useState(<div>
+        <RecommendCard className="recommendCard hide" />
+        <Overlay className="overlay hide" />
+        <ImageCardInactive imgSrc={imgSrc} imgHash={imgHash} friendSrc="/grayfriend.png" notFriendSrc="/graynotfriend.png" />
+    </div>);
 
     useEffect(async () => {
         setImgHash(Date.now);
@@ -23,22 +30,30 @@ const Final = (props) => {
             setClassification(response.data.classification);
             setCertainty(response.data.certainty);
             setTone(response.data.tone);
+            displayOverlay();
         })
     }, []);
 
-    useEffect(async () => 
-    { 
-        if (isInitialMount.current) {
-            isInitialMount.current = false;
-         } else {
-            setTimeout(waitForMessage, 200);
-        }
-    }, [certainty]);
+    const Loop = () => {
+        useEffect(async () => {
+            if (isInitialMount.current) {
+                isInitialMount.current = false;
+            } else {
+                if (volume > 0.0) await WaitForMessage();
+            }
+        }, [certainty]);
+    }
 
-    const waitForMessage = async () => {
-        await SpeakWrapper(setUpClassificationMessage(classification));
-        displayOverlay();
+    Loop();
+
+    const WaitForMessage = async () => {
+        volume -= volume * 0.45;
+        console.log(volume);
+        await finalSpeakWrapper("Can You?");
+        pitch -= volume * 0.45;
+        if (volume > 0.0) await WaitForMessage();
     };
+
 
     const setUpClassificationMessage = (classification) => {
 
@@ -47,12 +62,41 @@ const Final = (props) => {
 
     const displayOverlay = () => {
 
-       setRenderComponent(  <div>
-       <RecommendCard/>
-       <Overlay/>
-       <ImageCardInactive imgSrc={imgSrc} imgHash={imgHash} friendSrc="/grayfriend.png" notFriendSrc="/graynotfriend.png"/>
-       </div> )
-    }
+        setRenderComponent(<div>
+            <RecommendCard className="recommendCard" />
+            <Overlay className="overlay" />
+            <ImageCardInactive imgSrc={imgSrc} imgHash={imgHash} friendSrc="/grayfriend.png" notFriendSrc="/graynotfriend.png" />
+        </div>)
+    };
+
+    const finalSpeakWrapper = async (message) => {
+        let msg = new SpeechSynthesisUtterance();
+        msg.text = message;
+
+        await new Promise(
+            function (resolve, reject) {
+                let synth = window.speechSynthesis;
+                let id;
+
+                id = setInterval(() => {
+                    if (synth.getVoices().length !== 0) {
+                        resolve(synth.getVoices());
+                        clearInterval(id);
+                    }
+                }, 10);
+            }
+        ).then((voices) => msg.voice = voices.filter(function (voice) { return voice.name == 'Google US English'; })[0]);
+
+        msg.volume = volume; // 0 to 1
+        msg.rate = 1; // 0.1 to 10
+        msg.pitch = pitch; //0 to 2
+
+        await new Promise(function (resolve) {
+            //console.log(msg.text);
+            msg.onend = resolve;
+            speechSynthesis.speak(msg);
+        });
+    };
 
 
     return renderComponent;

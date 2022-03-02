@@ -27,19 +27,39 @@ const Step19_6 = (props) => {
         if (isInitialMount.current) {
             isInitialMount.current = false;
          } else {
-            setTimeout(waitForMessage, 200);
+            setTimeout(waitForMessage, 150);
         }
     }, [certainty]);
 
     const waitForMessage = async () => {
-        await SpeakWrapper(setUpClassificationMessage(classification));
+        await SpeakWrapper(setUpClassificationMessage(certainty, classification), 0.6);
         props.nextStep();
     };
 
-    const setUpClassificationMessage = (classification) => {
+    const setUpClassificationMessage = (certainty, classification) => {
+        let processedCertainty;
+        let lastFour = certainty.slice(-4);
+        if (lastFour === '.00%') {
+            processedCertainty = certainty.substr(0, certainty.indexOf('.')) + '%';
+        }
+        else {
+            processedCertainty = certainty;
+        }
 
-        return `${classification}. `
+        let preposition;
+        let first = classification.charAt(0);
+
+        if (first === 'a' || first === 'e' || first === 'i' || first === 'o' || first === 'u') {
+            preposition = "an";
+        }
+        else {
+            preposition = "a";
+        }
+
+
+        return `This is, ${preposition} ${classification} person`
     };
+
 
 
     return <ImageCardInactive imgSrc={imgSrc} imgHash={imgHash} friendSrc="/grayfriend.png" notFriendSrc="/graynotfriend.png"/>;

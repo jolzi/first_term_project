@@ -5,7 +5,7 @@ class Overlay extends Component {
 
     render() {
         return (
-            <div id="overlay">
+            <div className={this.props.className}>
             </div>
 
         );

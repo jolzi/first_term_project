@@ -55,13 +55,10 @@ const Onboarding = (props) => {
 
 
     const BecomeFriend = async () => {
-
-        await SpeakWrapper("friend");
         props.nextStep();
     };
 
     const NotBecomeFriend = async () => {
-        await SpeakWrapper("not a friend");
         props.nextStep();
     };
 

@@ -32,8 +32,7 @@ import Header from './components/Header';
 import Background from './components/Background';
 import Onboarding from './components/Onboarding';
 import Start from './components/Start';
-import Final from './components/Final';
-import {Howl, Howler} from 'howler';
+import {Howl} from 'howler';
 
 
 
@@ -78,12 +77,22 @@ function App() {
       <Header />
       <StepWizard isLazyMount={true}>
         <Start sound0={sound0} sound1={sound1} sound2={sound2} sound3={sound3} sound4={sound4}/>
+        <Step18 sound3={sound3} sound4={sound4}/>
+        <Step19_0 />
+        <Step19_1 />
+        <Step19_2 />
+        <Step19_3 />
+        <Step19_4 />
+        <Step19_5 />
+        <Step19_6 />
+        <Step19_7 />
+        <Step19_8 />
         <Step1 />
         <Step2 />
         <Step3 />
         <Step4 />
         <Step5 />
-        <Step6/>
+        <Step6 sound0={sound0} sound1={sound1}/>
         <Step7 />
         <Step8 />
         <Step9 sound0={sound0} sound1={sound1}/>
@@ -95,17 +104,8 @@ function App() {
         <Step15 sound2={sound2} sound3={sound3}/>
         <Step16 />
         <Step17 />
-        <Step18 sound3={sound3} sound4={sound4}/>
-        <Step19_0 />
-        <Step19_1 />
-        <Step19_2 />
-        <Step19_3 />
-        <Step19_4 />
-        <Step19_5 />
-        <Step19_6 />
-        <Step19_7 />
-        <Step19_8 />
-        <Final />
+        
+ 
 
         <Onboarding />
       </StepWizard>

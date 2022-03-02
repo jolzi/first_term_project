@@ -27,7 +27,7 @@ const Step19_2 = (props) => {
         if (isInitialMount.current) {
             isInitialMount.current = false;
          } else {
-            setTimeout(waitForMessage, 1000);
+            setTimeout(waitForMessage, 600);
         }
     }, [certainty]);
 

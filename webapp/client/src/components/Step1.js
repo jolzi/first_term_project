@@ -2,7 +2,6 @@ import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import ImageCard from "./ImageCard";
 import SpeakWrapper from "./SpeakWrapper";
-import FlavorGenerator from "./FlavorGenerator";
 
 
 const Step1 = (props) => {
@@ -12,7 +11,6 @@ const Step1 = (props) => {
     const [tone, setTone] = useState("");
     const [imgSrc, setImgSrc] = useState("http://localhost:3001/image");
     const [imgHash, setImgHash] = useState();
-    const flavorGenerator = new FlavorGenerator();
 
     useEffect(() => {
         setImgHash(Date.now);
@@ -24,14 +22,51 @@ const Step1 = (props) => {
     }, []);
 
     const BecomeFriend = async () => {
-        await SpeakWrapper(flavorGenerator.setUpFlavorMessage(certainty, classification, tone));
+        await SpeakWrapper(setUpFriendMessage(certainty, classification));
         props.nextStep();
     };
 
     const NotBecomeFriend = async () => {
-        await SpeakWrapper(flavorGenerator.setUpFlavorMessage(certainty, classification, tone));
+        await SpeakWrapper(setUpNoFriendMessage(certainty, classification));
         props.nextStep();
+    }
+
+    const setUpFriendMessage = (certainty, classification, tone) => {
+        let classificationMessage = setUpClassificationMessage(certainty, classification);
+        return ('Oh, how sweet! You have made your first friend. '
+            + classificationMessage);
     };
+
+    const setUpNoFriendMessage = (certainty, classification, tone) => {
+        let classificationMessage = setUpClassificationMessage(certainty, classification);
+        return 'Oh, not liking this one, I see? ' + classificationMessage + " though.";
+    };
+
+
+    const setUpClassificationMessage = (certainty, classification) => {
+        let processedCertainty;
+        let lastFour = certainty.slice(-4);
+        if (lastFour === '.00%') {
+            processedCertainty = certainty.substr(0, certainty.indexOf('.')) + '%';
+        }
+        else {
+            processedCertainty = certainty;
+        }
+
+        let preposition;
+        let first = classification.charAt(0);
+
+        if (first === 'a' || first === 'e' || first === 'i' || first === 'o' || first === 'u') {
+            preposition = "an";
+        }
+        else {
+            preposition = "a";
+        }
+
+
+        return `This is, ${processedCertainty} ${preposition}, ${classification} person`
+    };
+
 
     return <ImageCard imgSrc={imgSrc} imgHash={imgHash} becomeFriend={BecomeFriend} notBecomeFriend={NotBecomeFriend}/>;
 };

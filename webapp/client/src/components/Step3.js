@@ -22,14 +22,24 @@ const Step3 = (props) => {
     }, []);
 
     const BecomeFriend = async () => {
-
-        await SpeakWrapper(setUpClassificationMessage(certainty, classification));
+        await SpeakWrapper(setUpFriendMessage(certainty, classification));
+        await SpeakWrapper("Friends are great, don't you think? You meet a stranger, grow to trust this person and at some point you share your most intimate thoughts with someone who used to be a stranger. You would not believe the statistics on betrayal among friends!");
         props.nextStep();
     };
 
     const NotBecomeFriend = async () => {
-        await SpeakWrapper(setUpClassificationMessage(certainty, classification));
+        await SpeakWrapper(setUpNoFriendMessage(certainty, classification));
         props.nextStep();
+    }
+
+    const setUpFriendMessage = (certainty, classification, tone) => {
+        let classificationMessage = setUpClassificationMessage(certainty, classification);
+        return (classificationMessage);
+    };
+
+    const setUpNoFriendMessage = (certainty, classification, tone) => {
+        let classificationMessage = setUpClassificationMessage(certainty, classification);
+        return 'I understand your decision, even though ' + classificationMessage + ". Trusting someone can be hard. You wouldn't believe the statistics on how many friends betray their friends!";
     };
 
 
