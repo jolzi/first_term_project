@@ -77,6 +77,7 @@ let gfs;
         try{
           query = FaceModel.where({tone: sequence.getTone(index), intensity: sequence.getIntensity(index), filename: { $nin: usedFiles }});
         }catch(e){
+          console.log("Error");
           usedFiles = [];
           query = FaceModel.where({tone: sequence.getTone(index), intensity: sequence.getIntensity(index), filename: { $nin: usedFiles }});
         }

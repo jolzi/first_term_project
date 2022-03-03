@@ -1,39 +1,51 @@
 class FlavorGenerator {
-    flavorTexts = [];
+    correctFlavorTexts = [];
+    incorrectFlavorTexts = [];
+
+    positiveCorrectFlavorTexts = [];
+    positiveIncorrectFlavorTexts = [];
 
     constructor() {
-        this.positiveFlavorTexts.push({ text: 'test', position: 'front' });
-
-        this.flavorTexts = [
-            [{ text: '', position: 'front' }, 1],
-            [{ text: '', position: 'front' }, 2],
-            [{ text: '', position: 'front' }, 3],
-            [{ text: '', position: 'front' }, 4],
-            [{ text: '', position: 'front' }, 5],
-            [{ text: '', position: 'front' }, 6],
-            [{ text: '', position: 'front' }, 7],
-            [{ text: '', position: 'front' }, 8],
-            [{ text: '', position: 'front' }, 9],
-            [{ text: '', position: 'front' }, 10],
-            [{ text: '', position: 'front' }, 11],
-            [{ text: '', position: 'front' }, 12],
-            [{ text: '', position: 'front' }, 13],
-            [{ text: '', position: 'front' }, 14],
-            [{ text: '', position: 'front' }, 15],
-            [{ text: '', position: 'front' }, 16],
-            [{ text: '', position: 'front' }, 17],
-            [{ text: '', position: 'front' }, 18],
-            [{ text: '', position: 'front' }, 19.0],
-            [{ text: '', position: 'front' }, 19.1],
-            [{ text: '', position: 'front' }, 19.2],
-            [{ text: '', position: 'front' }, 19.3],
-            [{ text: '', position: 'front' }, 19.4],
-            ['negative', '3', 19.5],
-            ['negative', '3', 19.6],
-            ['negative', '3', 19.7],
-            ['negative', '3', 19.8]
-            ['negative', '2', 20]
+        this.correctFlavorTexts = [
+            "Correct. ",
+            "Good choice. ",
+            "You are right on this one. ",
+            "I agree. ",
+            "This time, you are right. ",
+            "You're right. ",
+            "Correct decision.  ",
+            "You made the right decision. ",
+            "Yes, you should avoid this person. ",
+            "Absolutely. "
         ]
+
+        this.incorrectFlavorTexts = [
+            "Incorrect. ",
+            "That's a bad choice. ",
+            "Wrong decision. ",
+            "I'm warning you. You should not befriend this person. ",
+            "You are wrong. ",
+            "I have to disagree. ",
+            "You're making the wrong choice. ",
+            "Not a good idea. ",
+            "A worrying choice. "
+        ]
+
+        this.positiveCorrectFlavorTexts = [
+            "That's better. ",
+            "I agree. ",
+            "Seems like you could be fine with this decision. ",
+            "Tolerable. ",
+            "I can understand your decision. "
+        ]
+
+        this.positiveIncorrectFlavorTexts = [
+            "Better safe than sorry, though.",
+            "But I can understand your hesitation. ",
+            "Your doubt is still understandable.",
+            "No harm in keeping this person a stranger, though."
+        ]
+
     }
 
     setUpClassificationMessage = (certainty, classification) => {
@@ -57,19 +69,34 @@ class FlavorGenerator {
         }
 
 
-        return `This is, ${processedCertainty} ${preposition}, ${classification} person`
+        return `This is, ${processedCertainty} ${preposition}, ${classification} person. `
     };
 
-    setUpFlavorMessage = (certainty, classification, index) => {
-        let msgObject;
-            msgObject = this.flavorTexts[index][Math.floor(Math.random() * this.flavorTexts[index].length)]
-
-        if (msgObject.position === 'front') {
-            return msgObject.text + this.setUpClassificationMessage(certainty, classification);
+    setUpFlavorMessage = (certainty, classification, tone, wantsToBeFriend) => {
+        let flavorArray;
+        let flavorMessage;
+        if (tone === 'negative') {
+            if (wantsToBeFriend) {
+                flavorArray = this.incorrectFlavorTexts;
+            }
+            else {
+                flavorArray = this.correctFlavorTexts;
+            }
+            flavorMessage = flavorArray[Math.floor(Math.random() * flavorArray.length)] + this.setUpClassificationMessage(certainty, classification);
         }
         else {
-            return this.setUpClassificationMessage(certainty, classification) + msgObject.text;
+            if(wantsToBeFriend) {
+                flavorArray = this.positiveCorrectFlavorTexts;
+                flavorMessage = flavorArray[Math.floor(Math.random() * flavorArray.length)] + this.setUpClassificationMessage(certainty, classification);
+            }
+            else
+            {
+                flavorArray = this.positiveIncorrectFlavorTexts;
+                flavorMessage = this.setUpClassificationMessage(certainty, classification) + flavorArray[Math.floor(Math.random() * flavorArray.length)];
+            }
         }
+
+        return flavorMessage;
     }
 }
 

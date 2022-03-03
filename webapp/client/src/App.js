@@ -32,43 +32,43 @@ import Header from './components/Header';
 import Background from './components/Background';
 import Onboarding from './components/Onboarding';
 import Start from './components/Start';
-import {Howl} from 'howler';
+import { Howl } from 'howler';
 
 
 
 function App() {
 
-    document.title = "Friendly Friend Helper";
+  document.title = "Friendly Friend Helper";
 
-    const sound0 = new Howl({
-      src: ['/sounds/soundtrack0.mp3'],
-      loop: true,
-      volume: 0.05
-    });
+  const sound0 = new Howl({
+    src: ['/sounds/soundtrack0.mp3'],
+    loop: true,
+    volume: 0.125
+  });
 
-    const sound1 = new Howl({
-      src: ['/sounds/soundtrack1.mp3'],
-      loop: true,
-      volume: 0.0
-    });
+  const sound1 = new Howl({
+    src: ['/sounds/soundtrack1.mp3'],
+    loop: true,
+    volume: 0.0
+  });
 
-    const sound2 = new Howl({
-      src: ['/sounds/soundtrack2.mp3'],
-      loop: true,
-      volume: 0.0
-    });
+  const sound2 = new Howl({
+    src: ['/sounds/soundtrack2.mp3'],
+    loop: true,
+    volume: 0.0
+  });
 
-    const sound3 = new Howl({
-      src: ['/sounds/soundtrack3.mp3'],
-      loop: true,
-      volume: 0.0
-    });
+  const sound3 = new Howl({
+    src: ['/sounds/soundtrack3.mp3'],
+    loop: true,
+    volume: 0.0
+  });
 
-    const sound4 = new Howl({
-      src: ['/sounds/soundtrack4.mp3'],
-      loop: true,
-      volume: 0.0
-    });
+  const sound4 = new Howl({
+    src: ['/sounds/soundtrack4.mp3'],
+    loop: true,
+    volume: 0.0
+  });
 
 
   return (
@@ -76,8 +76,26 @@ function App() {
     <div className="App">
       <Header />
       <StepWizard isLazyMount={true}>
-        <Start sound0={sound0} sound1={sound1} sound2={sound2} sound3={sound3} sound4={sound4}/>
-        <Step18 sound3={sound3} sound4={sound4}/>
+        <Start sound0={sound0} sound1={sound1} sound2={sound2} sound3={sound3} sound4={sound4} />
+        <Onboarding />
+        <Step1 />
+        <Step2 />
+        <Step3 />
+        <Step4 />
+        <Step5 />
+        <Step6 sound0={sound0} sound1={sound1} />
+        <Step7 />
+        <Step8 />
+        <Step9 sound0={sound0} sound1={sound1} />
+        <Step10 />
+        <Step11 />
+        <Step12 sound1={sound1} sound2={sound2} />
+        <Step13 />
+        <Step14 />
+        <Step15 sound2={sound2} sound3={sound3} />
+        <Step16 />
+        <Step17 />
+        <Step18 sound3={sound3} sound4={sound4} />
         <Step19_0 />
         <Step19_1 />
         <Step19_2 />
@@ -87,27 +105,6 @@ function App() {
         <Step19_6 />
         <Step19_7 />
         <Step19_8 />
-        <Step1 />
-        <Step2 />
-        <Step3 />
-        <Step4 />
-        <Step5 />
-        <Step6 sound0={sound0} sound1={sound1}/>
-        <Step7 />
-        <Step8 />
-        <Step9 sound0={sound0} sound1={sound1}/>
-        <Step10 />
-        <Step11 />
-        <Step12 sound1={sound1} sound2={sound2}/>
-        <Step13 />
-        <Step14 />
-        <Step15 sound2={sound2} sound3={sound3}/>
-        <Step16 />
-        <Step17 />
-        
- 
-
-        <Onboarding />
       </StepWizard>
 
       <Background />

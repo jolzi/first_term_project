@@ -41,12 +41,13 @@ const Step18 = (props) => {
 
         SoundFader(props.sound3, props.sound4);
         await SpeakWrapper(setUpInterceptionMessage(certainty, classification));
+        await SpeakWrapper("I can not let you be tricked by a person this " + classification + ". I am sure you understand. Let's move on.")
         props.nextStep();
     };
 
     const setUpInterceptionMessage = (certainty, classification, tone) => {
         let classificationMessage = setUpClassificationMessage(certainty, classification);
-        return 'This person could be a threat and must be discarded, ' + classificationMessage;
+        return 'No, definitely not this person. ' + classificationMessage;
     };
 
     const setUpClassificationMessage = (certainty, classification) => {

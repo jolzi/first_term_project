@@ -6,6 +6,9 @@ import SpeakWrapper from "./SpeakWrapper";
 
 const Step19_0 = (props) => {
 
+    const [friendSrc, setFriendSrc] = useState("/crayonfriend.png");
+    const [notFriendSrc, setNotFriendSrc] = useState("/crayonnotfriend.png");
+
     const [classification, setClassification] = useState("");
     const [certainty, setCertainty] = useState("");
     const [tone, setTone] = useState("");
@@ -32,7 +35,10 @@ const Step19_0 = (props) => {
     }, [certainty]);
 
     const waitForMessage = async () => {
-        await SpeakWrapper(setUpClassificationMessage(certainty, classification));
+        setFriendSrc("/grayfriend.png");
+        setNotFriendSrc("graynotfriend.png");
+
+        await SpeakWrapper("There is no way. " + setUpClassificationMessage(certainty, classification));
         props.nextStep();
     };
 
@@ -57,11 +63,11 @@ const Step19_0 = (props) => {
         }
 
 
-        return `This is, ${processedCertainty} ${preposition}, ${classification} person`
+        return `This is ${processedCertainty} ${preposition}, ${classification} person`
     };
 
 
-    return <ImageCardInactive imgSrc={imgSrc} imgHash={imgHash} friendSrc="/grayfriend.png" notFriendSrc="/graynotfriend.png"/>;
+    return <ImageCardInactive imgSrc={imgSrc} imgHash={imgHash} friendSrc={friendSrc} notFriendSrc={notFriendSrc}/>;
 };
 
 export default Step19_0;

@@ -4,6 +4,7 @@ import ImageCardInactive from "./ImageCardInactive";
 import SpeakWrapper from "./SpeakWrapper";
 import Overlay from "./Overlay";
 import RecommendCard from "./RecommendCard";
+import SoundFader from "./SoundFader";
 
 
 const Step19_8 = (props) => {
@@ -15,18 +16,16 @@ const Step19_8 = (props) => {
     const [imgHash, setImgHash] = useState();
     const isInitialMount = useRef(true);
 
-    let pitch = 0.4;
+    const [recommendCard, setRecommendCard] = useState("recommendCard hide");
+    const [overlay, setOverlay] = useState("overlay hide");
+
+    let pitch = 0.8;
     let volume = 1.1;
     let rate = 1.0;
 
-    const [renderComponent, setRenderComponent] = useState(<div>
-        <RecommendCard className="recommendCard hide" />
-        <Overlay className="overlay hide" />
-        <ImageCardInactive imgSrc={imgSrc} imgHash={imgHash} friendSrc="/grayfriend.png" notFriendSrc="/graynotfriend.png" />
-    </div>);
-
     useEffect(async () => {
         setImgHash(Date.now);
+
         Axios.get("http://localhost:3001/classification").then((response) => {
             setClassification(response.data.classification);
             setCertainty(response.data.certainty);
@@ -34,19 +33,19 @@ const Step19_8 = (props) => {
         })
     }, []);
 
-    useEffect(async () => 
-    { 
+    useEffect(async () => {
         if (isInitialMount.current) {
             isInitialMount.current = false;
-         } else {
+        } else {
             setTimeout(waitForMessage, 50);
         }
     }, [certainty]);
 
     const waitForMessage = async () => {
-        await SpeakWrapper(setUpClassificationMessage(certainty, classification), pitch, volume);
-        
-        displayOverlay();
+        await SpeakWrapper(setUpClassificationMessage(certainty, classification), pitch, volume, 0.866);
+        setTimeout(displayOverlay, 3000);
+
+        /*
         while (volume > 0.01)
         {
             volume -= volume * 0.45;
@@ -56,6 +55,7 @@ const Step19_8 = (props) => {
             pitch += 0.3;
             if(pitch > 1.0) pitch = 1.0;
         }
+        */
     };
 
     const setUpClassificationMessage = (certainty, classification) => {
@@ -82,47 +82,17 @@ const Step19_8 = (props) => {
         return `This is, ${preposition} ${classification} person. 77 percent of murders are committed by friends. You can't be willing to take this risk, can you?`
     };
 
-    const finalSpeakWrapper = async (message) => {
-        let msg = new SpeechSynthesisUtterance();
-        msg.text = message;
-
-        await new Promise(
-            function (resolve, reject) {
-                let synth = window.speechSynthesis;
-                let id;
-
-                id = setInterval(() => {
-                    if (synth.getVoices().length !== 0) {
-                        resolve(synth.getVoices());
-                        clearInterval(id);
-                    }
-                }, 10);
-            }
-        ).then((voices) => msg.voice = voices.filter(function (voice) { return voice.name == 'Google US English'; })[0]);
-
-        msg.volume = volume; // 0 to 1
-        msg.rate = 1; // 0.1 to 10
-        msg.pitch = pitch; //0 to 2
-
-        await new Promise(function (resolve) {
-            //console.log(msg.text);
-            msg.onend = resolve;
-            speechSynthesis.speak(msg);
-        });
-    };
-
     const displayOverlay = () => {
 
-        setRenderComponent(<div>
-            <RecommendCard className="recommendCard" />
-            <Overlay className="overlay" />
-            <ImageCardInactive imgSrc={imgSrc} imgHash={imgHash} friendSrc="/grayfriend.png" notFriendSrc="/graynotfriend.png" />
-        </div>)
+      setRecommendCard("recommendCard");
+      setOverlay("overlay");
     };
 
-
-
-    return renderComponent;
+    return (<div>
+        <RecommendCard className={recommendCard} />
+        <Overlay className={overlay} />
+        <ImageCardInactive imgSrc={imgSrc} imgHash={imgHash} friendSrc="/grayfriend.png" notFriendSrc="/graynotfriend.png" />
+    </div>);
 };
 
 export default Step19_8;

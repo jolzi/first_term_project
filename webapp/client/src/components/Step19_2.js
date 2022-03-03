@@ -13,6 +13,9 @@ const Step19_2 = (props) => {
     const [imgHash, setImgHash] = useState();
     const isInitialMount = useRef(true);
 
+    const [friendSrc, setFriendSrc] = useState("/crayonfriend.png");
+    const [notFriendSrc, setNotFriendSrc] = useState("/crayonnotfriend.png");
+
     useEffect(async () => {
         setImgHash(Date.now);
         Axios.get("http://localhost:3001/classification").then((response) => {
@@ -32,7 +35,10 @@ const Step19_2 = (props) => {
     }, [certainty]);
 
     const waitForMessage = async () => {
-        await SpeakWrapper(setUpClassificationMessage(certainty, classification));
+        setFriendSrc("/grayfriend.png");
+        setNotFriendSrc("graynotfriend.png");
+        
+        await SpeakWrapper("No. " + setUpClassificationMessage(certainty, classification) + ". You have to be careful.");
         props.nextStep();
     };
 
@@ -61,7 +67,7 @@ const Step19_2 = (props) => {
     };
 
 
-    return <ImageCardInactive imgSrc={imgSrc} imgHash={imgHash} friendSrc="/grayfriend.png" notFriendSrc="/graynotfriend.png"/>;
+    return <ImageCardInactive imgSrc={imgSrc} imgHash={imgHash} friendSrc={friendSrc} notFriendSrc={notFriendSrc}/>;
 };
 
 export default Step19_2;

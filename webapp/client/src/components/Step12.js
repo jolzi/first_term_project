@@ -26,7 +26,7 @@ const Step1 = (props) => {
     const BecomeFriend = async () => {
         SoundFader(props.sound1, props.sound2);
         await SpeakWrapper(setUpFriendMessage(certainty, classification, tone));
-        await SpeakWrapper(' I begin to doubt, that you can ensure your own safety, if you continue to carelessly befriend anyone.')
+        await SpeakWrapper('I begin to doubt, that you can ensure your own safety, if you continue to carelessly befriend anyone.')
         props.nextStep();
     };
 

@@ -2,6 +2,7 @@ import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import ImageCard from "./ImageCard";
 import SpeakWrapper from "./SpeakWrapper";
+import FlavorGenerator from "./FlavorGenerator";
 
 
 const Step10 = (props) => {
@@ -11,6 +12,8 @@ const Step10 = (props) => {
     const [tone, setTone] = useState("");
     const [imgSrc, setImgSrc] = useState("http://localhost:3001/image");
     const [imgHash, setImgHash] = useState();
+
+    const flavorGenerator = new FlavorGenerator();
 
     useEffect(() => {
         setImgHash(Date.now);
@@ -23,12 +26,12 @@ const Step10 = (props) => {
 
     const BecomeFriend = async () => {
 
-        await SpeakWrapper(setUpClassificationMessage(certainty, classification));
+        await SpeakWrapper(flavorGenerator.setUpFlavorMessage(certainty, classification, tone, true));
         props.nextStep();
     };
 
     const NotBecomeFriend = async () => {
-        await SpeakWrapper(setUpClassificationMessage(certainty, classification));
+        await SpeakWrapper(flavorGenerator.setUpFlavorMessage(certainty, classification, tone, false));
         props.nextStep();
     };
 
