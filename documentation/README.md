@@ -1,5 +1,5 @@
 
-# Friendly Friend Helper - First Term Project by Jannis Volz
+# Friendly Friend Helper - First Term Project by Jolzi
 ## Online Deployment
 
 I have deployed my app using Heroku, which you can find here: http://friendlyfriendhelper.herokuapp.com/    
